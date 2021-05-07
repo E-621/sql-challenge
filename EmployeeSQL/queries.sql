@@ -10,7 +10,8 @@ Select
 	hire_date
 From
 	employees
-Where hire_date Between to_date('1986-01-01', 'YYYY-DD-MM') And to_date('1986-31-12', 'YYYY-DD-MM');
+Where hire_date Between to_date('1986-01-01', 'YYYY-DD-MM') And to_date('1986-31-12', 'YYYY-DD-MM') 
+Order by hire_date Asc;
 
 -- List the manager of each department with the following information: department number, department name, 
 -----the manager's employee number, last name, first name.
@@ -18,12 +19,14 @@ Select
 	departments.dept_no,
 	departments.dept_name,
 	dept_manager.emp_no,
-	employees.emp_no,
 	employees.last_name,
 	employees.first_name
-From departments
-Inner Join employees on employees.emp_no = dept_manager.emp_no;
-
+From dept_manager
+Inner Join employees 
+	on employees.emp_no = dept_manager.emp_no
+Inner Join  departments
+	on dept_manager.dept_no = departments.dept_no
+Order by dept_name asc;
 
 -- List the department of each employee with the following information: employee number, last name, first name, and department name.
 
